@@ -1,5 +1,3 @@
-
-
 import os
 
 class ToDoList:
@@ -14,16 +12,16 @@ class ToDoList:
         with open(self.file_path, 'w') as file:
             file.write('\n'.join(self.tasks))
 
-    def show_tasks(self):
+    def show(self):
         print("Tasks:" if self.tasks else "No tasks found.")
         [print(f"{index}. {task}") for index, task in enumerate(self.tasks, start=1)]
 
-    def add_task(self, new_task):
+    def add(self, new_task):
         self.tasks.append(new_task)
         self.save_tasks()
         print(f"Task '{new_task}' added successfully.")
 
-    def delete_task(self, task_index):
+    def delete(self, task_index):
         try:
             task_index = int(task_index)
             deleted_task = self.tasks.pop(task_index - 1)
@@ -32,7 +30,7 @@ class ToDoList:
         except (ValueError, IndexError):
             print("Invalid task index.")
 
-    def update_task(self, task_index, new_task):
+    def update(self, task_index, new_task):
         try:
             task_index = int(task_index)
             self.tasks[task_index - 1] = new_task
@@ -51,16 +49,15 @@ if __name__ == "__main__":
         choice = input("Enter your choice (1-5): ")
 
         if choice == "1":
-            todo_list.show_tasks()
+            todo_list.show()
         elif choice == "2":
-            todo_list.add_task(input("Enter the new task: "))
+            todo_list.add(input("Enter the new task: "))
         elif choice == "3":
-            todo_list.delete_task(input("Enter the task index to delete: "))
+            todo_list.delete(input("Enter the task index to delete: "))
         elif choice == "4":
-            todo_list.update_task(input("Enter the task index to update: "), input("Enter the new task: "))
+            todo_list.update(input("Enter the task index to update: "), input("Enter the new task: "))
         elif choice == "5":
             print("Exiting the To-Do List application. Goodbye!")
             break
         else:
             print("Invalid choice. Please enter a number between 1 and 5.")
-
